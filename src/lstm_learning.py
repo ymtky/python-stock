@@ -12,7 +12,8 @@ NUM_EPOCH = 50
 code = 7203
 start = "2014/01/01"
 end = "2016/12/31"
-path = "data/"
+data_path = "data/"
+weight_path = "weight/"
 
 def load(file_path, start, end):
   df = pd.read_csv(file_path)
@@ -42,3 +43,4 @@ input_data = np.array(list(map(lambda n:n[:DATA_PERIOD], data))).reshape(len(dat
 output_data = np.array(list(map(lambda n:n[DATA_PERIOD], data))).reshape(len(data), 1)
 
 model.fit(input_data, output_data, nb_epoch=NUM_EPOCH, batch_size=BATCH_SIZE)
+model.save_weights(weight_path + str(code) + '.h5');
