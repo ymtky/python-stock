@@ -15,8 +15,18 @@ def rate(data):
     result.append(round(data[i] / data[i + 1] - 1, 2))
   return result
 
-def divide(data, period):
+#分割する
+def divide(data, period, space):
   result = []
   for i in range(len(data) - period):
     result.append(data[i: i + period])
+  return result[::space]
+
+#0~1に変換する
+def normarize(data):
+  result = []
+  mx = max(data)
+  mn = min(data)
+  for i in data:
+    result.append((i - mn) / (mx - mn))
   return result
