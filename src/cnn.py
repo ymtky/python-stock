@@ -14,7 +14,7 @@ result_path = "result/cnn/"
 
 def create_model():
   model = Sequential()
-  model.add(Convolution1D(nb_filter=32, filter_length=3, border_mode='same', input_shape = (DATA_PERIOD, 1)))
+  model.add(Convolution1D(nb_filter=32, filter_length=3, border_mode='same', input_shape = (DATA_PERIOD, NUM_PARAMS)))
   model.add(Activation('relu'))
   model.add(MaxPooling1D(pool_length=2))
   model.add(Convolution1D(nb_filter=64, filter_length=3, border_mode='same'))

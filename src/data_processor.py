@@ -30,3 +30,20 @@ def normarize(data):
   for i in data:
     result.append((i - mn) / (mx - mn))
   return result
+
+#2次元データの配列を0~1に変換する
+def normarize2D(data):
+  result = []
+  for i in data:
+    mx = max(i.flatten())
+    mn = min(i.flatten())
+    temp = []
+    for j in i:
+      temp.append([
+        (j[0] - mn) / (mx - mn),
+        (j[1] - mn) / (mx - mn),
+        (j[2] - mn) / (mx - mn),
+        (j[3] - mn) / (mx - mn)
+      ])
+    result.append(temp)
+  return result

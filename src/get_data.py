@@ -8,7 +8,7 @@ interval = 86400  #データの間隔(秒)。1日 = 86400秒
 market = "TYO"  #取引所のコード　TYO=東京証券取引所
 period =  "3Y" #データを取得する期間
 
-def get_daily_data(code: int, from_date: datetime, to_date: datetime):
+def get_daily_data(code, from_date: datetime, to_date: datetime):
   peropd_days = (to_date - from_date).days
 
   params = {
@@ -41,4 +41,4 @@ def get_daily_data(code: int, from_date: datetime, to_date: datetime):
   data_path = "data/"
   df.to_csv(data_path + str(code) + ".csv", index=False)
 
-get_daily_data(7203, datetime(2015,11, 1), datetime.now())
+get_daily_data(7203, datetime(2014, 1, 1), datetime.now())
