@@ -22,7 +22,7 @@ def get_daily_data(code, from_date: datetime, to_date: datetime):
   r = requests.get(url, params=params)
 
   lines = r.text.splitlines()
-  columns = lines[4].split("=")[1].split(",")
+  columns = lines[4].split("=")[1].split(",") + ["MONTH", "DAY"]
   pridces = lines[8:]
 
   base_date = datetime.fromtimestamp(int(pridces[0].split(",")[0].lstrip('a')))
@@ -33,9 +33,10 @@ def get_daily_data(code, from_date: datetime, to_date: datetime):
     #dateがタイムスタンプの場合はdatetimeに
     if(not cols[0].isdigit()):
       base_date = datetime.fromtimestamp(int(cols[0].lstrip('a')))
-      result.append([base_date.date(), cols[1], cols[2], cols[3], cols[4], cols[5]])
+      result.append([base_date.date(), cols[1], cols[2], cols[3], cols[4], cols[5], base_date.month, base_date.day])
     else:
-      result.append([(base_date + timedelta(days = int(cols[0]))).date(), cols[1], cols[2], cols[3], cols[4], cols[5]])
+      date = base_date + timedelta(days = int(cols[0]))
+      result.append([date.date(), cols[1], cols[2], cols[3], cols[4], cols[5], date.month, date.day])
 
   df = pd.DataFrame(result, columns = columns)
   data_path = "data/"

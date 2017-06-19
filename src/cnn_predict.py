@@ -14,7 +14,7 @@ model_path = "result/cnn/"
 
 DATA_PERIOD = 20
 DATA_DURATION = 5
-NUM_PARAMS  = 5
+NUM_PARAMS  = 7
 
 data = data_processor.load_data(data_path + str(code) + ".csv", start, end)
 data = data_processor.divide(data, DATA_PERIOD + DATA_DURATION, 1)

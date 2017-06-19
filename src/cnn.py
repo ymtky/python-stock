@@ -5,7 +5,7 @@ from keras.layers import Dense, Activation, Dropout, Flatten, Convolution1D
 from keras.layers.pooling import MaxPooling1D
 
 DATA_PERIOD = 20
-NUM_PARAMS = 5
+NUM_PARAMS = 7
 NUM_UNIT = 100
 BATCH_SIZE = 32
 NUM_EPOCH = 100
