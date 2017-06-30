@@ -41,4 +41,5 @@ def get_daily_data(code, from_date: datetime, to_date: datetime):
   data_path = "data/"
   df.to_csv(data_path + str(code) + ".csv", index=False)
 
-get_daily_data(7203, datetime(2014, 1, 1), datetime.now())
+if __name__ == "__main__":
+  get_daily_data(7203, datetime(2014, 1, 1), datetime.now())

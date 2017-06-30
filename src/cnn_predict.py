@@ -1,10 +1,11 @@
+import math
 import pandas as pd
 import numpy as np
 from keras.models import model_from_json
 
 import cnn
 import data_processor
-import cnn_data_processor
+import cnn_data_generater
 
 code = 7203
 start = "2017-01-01"
@@ -16,13 +17,13 @@ DATA_PERIOD = 20
 DATA_DURATION = 5
 NUM_PARAMS  = 5
 
-data = data_processor.load_data(data_path + str(code) + ".csv", start, end)
-data = data_processor.divide(data, DATA_PERIOD + DATA_DURATION, 1)
-test_data = cnn_data_processor.generate_input_data(data)
-
+test_data = cnn_data_generater.generate_input_data(code, start, end)
 model = cnn.load_model(model_path, code)
 predicted = model.predict(test_data, verbose=1)
 predicted =  list(map(lambda n:n[0], predicted))
+
+data = data_processor.load_data(data_path + str(code) + ".csv", start, end)
+data = data_processor.divide(data, DATA_PERIOD + DATA_DURATION, 1)
 base_price = list(map(lambda n:n[DATA_PERIOD - 1], list(map(lambda n:n['CLOSE'].tolist(), data))))
 acual_price = list(map(lambda n:n[DATA_PERIOD + DATA_DURATION - 1], list(map(lambda n:n['CLOSE'].tolist(), data))))
 
