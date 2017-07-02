@@ -22,7 +22,7 @@ def predict(code, start, end):
   predicted =  list(map(lambda n:n[0], predicted))
 
   data = data_processor.load_data(data_path + str(code) + ".csv", start, end)
-  data = data_processor.divide(data, DATA_PERIOD, 1)
+  data = data_processor.divide(data, DATA_PERIOD, 0)
   base_price = list(map(lambda n:n[DATA_PERIOD - 1], list(map(lambda n:n['CLOSE'].tolist(), data))))
   date = list(map(lambda n:(datetime.strptime(n[DATA_PERIOD - 1], "%Y-%m-%d") + timedelta(days = DATA_DURATION)).strftime("%Y-%m-%d"), list(map(lambda n:n['DATE'].tolist(), data))))
 
@@ -32,6 +32,8 @@ def predict(code, start, end):
     'base_price': base_price
   })
   df.to_csv("result.csv", index=False)
+  fig = (df.plot()).get_figure()
+  fig.savefig('../figure.png', dpi=600)
 
 def test(code, start, end):
   test_data = cnn_data_generater.generate_input_data(code, start, end)

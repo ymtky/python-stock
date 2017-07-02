@@ -31,7 +31,7 @@ def generate_output_data(code, start, end):
 
 def generate_predict_data(code, start, end):
  data = data_processor.load_data(data_path + str(code) + ".csv", start, end)
- data = data_processor.divide(data, DATA_PERIOD, 1)
+ data = data_processor.divide(data, DATA_PERIOD, 0)
  value_data = list(map(lambda n:n.loc[:,['CLOSE', 'OPEN', 'HIGH', 'LOW']].values, data))
  value_data = list(map(lambda n:n[:DATA_PERIOD], value_data))
  value_data = data_processor.normarize2D(np.array(value_data))
