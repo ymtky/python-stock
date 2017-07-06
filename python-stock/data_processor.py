@@ -20,7 +20,10 @@ def divide(data, period, space):
   result = []
   for i in range(len(data) - period):
     result.append(data[i: i + period])
-  return result[::space]
+  if space == 0:
+    return result
+  else:
+    return result[::space]
 
 #0~1に変換する
 def normarize(data):
